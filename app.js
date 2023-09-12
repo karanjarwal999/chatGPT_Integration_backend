@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 app.get('/',(req,res)=>{
-    res.send('hii')
+    res.send('backend running and chatGPT Integrated')
 })
 
 app.post('/generate-response', async (req, res) => {
