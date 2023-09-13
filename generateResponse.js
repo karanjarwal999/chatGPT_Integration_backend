@@ -1,15 +1,17 @@
 const OpenAI = require('openai');
 require('dotenv').config();
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
-async function generateResponse(prompt) {
+async function generateResponse(prompt,apiKey) {
+  const openai = new OpenAI({
+    apiKey: apiKey || process.env.OPENAI_API_KEY,
+  });
+
   const params = {
     prompt: prompt,
     maxTokens: 100,
   };
+
   try {
     const chatCompletion = await openai.chat.completions.create({
       messages: [{ role: "user", content: prompt }],
@@ -18,6 +20,7 @@ async function generateResponse(prompt) {
     return chatCompletion.choices[0].message
   } catch (error) {
     console.error('Error from OpenAI:', error);
+    return error.message;
   }
 }
 

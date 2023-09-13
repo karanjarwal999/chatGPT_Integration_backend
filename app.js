@@ -12,7 +12,8 @@ app.get('/',(req,res)=>{
 
 app.post('/generate-response', async (req, res) => {
     const prompt = req.body.prompt;
-    const response = await generateResponse(prompt);
+    const apiKey = req.body.apiKey
+    const response = await generateResponse(prompt,apiKey);
     res.json({ response });
 });
 
